@@ -7,8 +7,10 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.awt.BorderLayout;
+import java.awt.List;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.awt.Color;
 
 import javax.swing.JTextField;
@@ -17,6 +19,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import eveofescape.Area;
 import eveofescape.Commands;
 
 import java.awt.event.ActionListener;
@@ -72,36 +75,6 @@ public class main_gui {
 		loadInitScreen();
 		//loadMainScreen();
 		
-		
-		main_text.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				main_input.requestFocus();
-			}
-		});
-		main_text.getDocument().addDocumentListener(new DocumentListener() {
-
-			@Override
-			public void changedUpdate(DocumentEvent arg0) {
-				updateScroll();				
-			}
-
-			@Override
-			public void insertUpdate(DocumentEvent arg0) {
-				updateScroll();
-			}
-
-			@Override
-			public void removeUpdate(DocumentEvent arg0) {
-				updateScroll();
-			}
-			
-			private void updateScroll() {
-				main_scroller.scrollRectToVisible(main_text.getVisibleRect());
-				
-			
-			} 
-		});
 
 		
 	}
@@ -121,8 +94,13 @@ public class main_gui {
 		JScrollPane title_scroller = new JScrollPane(title_screen, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		frame.add(title_scroller);
 		
-		//request the pointer on open
-		init_input.requestFocus();
+		
+		//Listeners
+		frame.addWindowListener( new WindowAdapter() {
+			   public void windowOpened( WindowEvent e ){
+				   init_input.requestFocus();
+			     }
+			   } );
 		
 		init_input.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -132,6 +110,14 @@ public class main_gui {
 			}
 		});
 		
+		title_screen.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				title_screen.requestFocus();
+			}
+		});
+		
+		
 	}
 	
 	protected void loadGui(String str) {
@@ -139,13 +125,22 @@ public class main_gui {
 		case "1":
 		case "2":
 		case "3":
-			System.out.println("loading main screen...");
+			System.out.println("loading developer screen...");
 			frame.getContentPane().removeAll();
 
 			loadMainScreen();
 			frame.getContentPane().add(main_input, BorderLayout.PAGE_END);
 			frame.revalidate();
 			frame.repaint();
+			
+			main_text.append("\nChoose an area to load for editing.\n");
+			try {
+				List areaList = Area.loadAreaList();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		default:
 			
 			break;
@@ -165,22 +160,27 @@ public class main_gui {
 
 	public void loadMainScreen () {
 		
+		//create the text field and append it to the gui
 		main_input = new JTextField();
 		main_input.setForeground(Color.WHITE);
 		main_input.setBackground(Color.BLACK);
-		frame.getContentPane().add(main_input, BorderLayout.PAGE_END);
-		//main_input.setColumns(10);
 		main_input.setFont(main_font);
+		frame.getContentPane().add(main_input, BorderLayout.PAGE_END);
 		
+		//Create the main text display area and wrap it in a jscrollpane		
 		main_text = setDefaults(main_text);
 		main_scroller = new JScrollPane(main_text, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
 		//set the focus to the text input by default
 		main_input.requestFocusInWindow();
 		main_text.setText("Entered into Development mode");
-		frame.getContentPane().add(main_scroller);
-		//Listeners
 		
+		//Add the scrollpane to the gui
+		frame.getContentPane().add(main_scroller);
+		
+		
+		
+		//Listeners
 		frame.addWindowListener( new WindowAdapter() {
 			   public void windowOpened( WindowEvent e ){
 			        main_input.requestFocus();
@@ -195,6 +195,13 @@ public class main_gui {
 				main_text.setSelectionEnd(main_text.getText().length());
 				String result = Commands.runCmd(str);
 				main_text.append("\n" +result + "\n");
+			}
+		});
+		
+		main_text.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				main_input.requestFocus();
 			}
 		});
 		

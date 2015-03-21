@@ -13,14 +13,26 @@ public class Database {
 			try {
 				String dbURL = "jdbc:derby:data/" + arr + ";create=true";
 				Connection conn = DriverManager.getConnection(dbURL);
+				conn.close();
 				return "Database " + arr + " loaded";
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return e.toString();
 			}
 		} else {
 			return "SYNTAX ERROR. \nUSAGE: loaddb [database]";
+		}
+	}
+	
+	public static Connection loadConnection (String args ) {
+		String dbURL = "jdbc:derby:data/" + args + ";create=true";
+		try {
+			Connection conn = DriverManager.getConnection(dbURL);
+			conn.close();
+			return conn;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 

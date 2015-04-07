@@ -1,23 +1,10 @@
 ----------------------------------------------------------------
-Sun Mar 22 05:38:33 EDT 2015:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.2 - (1557835): instance a816c00e-014c-40d9-1e00-00000588fc98 
-on database directory I:\Code\EveofEscape\data\area  with class loader sun.misc.Launcher$AppClassLoader@25917a08 
+Tue Apr 07 05:00:37 EDT 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.2 - (1557835): instance a816c00e-014c-931c-24bb-00000582d4e0 
+on database directory I:\Code\EveofEscape\data  with class loader sun.misc.Launcher$AppClassLoader@c387f44 
 Loaded from file:/C:/Program%20Files%20(x86)/Java/jdk1.7.0_60/db/lib/derby.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.7.0_60-b19
-user.dir=I:\Code\EveofEscape
-os.name=Windows 7
-os.arch=amd64
-os.version=6.1
-derby.system.home=null
-Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Sun Mar 22 05:38:50 EDT 2015:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.2 - (1557835): instance 0b5b0099-014c-40d9-1e00-00000588fc98 
-on database directory I:\Code\EveofEscape\data\ area  with class loader sun.misc.Launcher$AppClassLoader@25917a08 
-Loaded from file:/C:/Program%20Files%20(x86)/Java/jdk1.7.0_60/db/lib/derby.jar
-java.vendor=Oracle Corporation
-java.runtime.version=1.7.0_60-b19
+java.runtime.version=1.8.0_40-b26
 user.dir=I:\Code\EveofEscape
 os.name=Windows 7
 os.arch=amd64

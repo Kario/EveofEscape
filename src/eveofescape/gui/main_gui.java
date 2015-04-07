@@ -134,13 +134,8 @@ public class main_gui {
 			frame.repaint();
 			
 			main_text.append("\nChoose an area to load for editing.\n");
-			try {
-				List areaList = Area.loadAreaList();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
+			main_text.append(Area.areaCmd("list"));
+
 		default:
 			
 			break;

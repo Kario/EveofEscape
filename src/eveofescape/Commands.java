@@ -23,6 +23,7 @@ public class Commands {
 			case "removegui": main.window.frame.remove(main_gui.main_scroller); main.window.frame.repaint();  return "Gui's gone, Dave.";
 			case "addgui" : main.window.frame.add(main_gui.main_scroller); main.window.frame.repaint(); return "Dave? How did you get here?!";
 			case "loaddb" : return Database.loadDatabase(vars);
+			case "area" : return Area.areaCmd(vars.trim());
 				
 		
 			default: return "Not a Command";

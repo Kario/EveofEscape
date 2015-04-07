@@ -2,7 +2,9 @@ package eveofescape;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import org.apache.derby.jdbc.EmbeddedDriver;
 
@@ -24,8 +26,8 @@ public class Database {
 		}
 	}
 	
-	public static Connection loadConnection (String args ) {
-		String dbURL = "jdbc:derby:data/" + args + ";create=true";
+	public static Connection loadConnection ( ) {
+		String dbURL = "jdbc:derby:data/";
 		try {
 			Connection conn = DriverManager.getConnection(dbURL);
 			conn.close();
@@ -35,5 +37,4 @@ public class Database {
 			return null;
 		}
 	}
-
 }
